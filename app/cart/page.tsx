@@ -40,7 +40,7 @@ export default function CartPage() {
 
           <div className="border-t pt-4 flex justify-between items-center">
             <h2 className="text-xl font-bold">Total:</h2>
-            <p className="text-xl font-bold">${total.toFixed(2)}</p>
+            <p className="text-xl font-bold">${(total || 0).toFixed(2)}</p>
           </div>
         </div>
       )}

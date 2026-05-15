@@ -17,6 +17,8 @@ export default function Navbar() {
       <Link href="/" className="text-2xl font-bold">
         ShopEase
       </Link>
+     
+
 
       <div className="flex items-center gap-6">
         <Link href="/" className="hover:text-gray-600">
