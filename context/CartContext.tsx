@@ -1,17 +1,7 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
-
-type Product = {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  category: string;
-  image: string;
-  rating: number;
-  inStock: boolean;
-};
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { Product } from "../data/products";
 
 type CartContextType = {
   cart: Product[];
@@ -24,29 +14,41 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<Product[]>([]);
-  useEffect(() => {
-  const storedCart = localStorage.getItem("cart");
-  if (storedCart) {
-    setCart(JSON.parse(storedCart));
-  }
-}, []);
-useEffect(() => {
-  localStorage.setItem("cart", JSON.stringify(cart));
-}, [cart]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
- 
-
+  // Week 3 Requirement: Load from localStorage on initialization
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
+    const stored = localStorage.getItem("shopease_cart");
+    if (stored) {
+      try {
+        setCart(JSON.parse(stored));
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    setIsLoaded(true);
+  }, []);
+
+  // Week 3 Requirement: Save changes back to localStorage
+  useEffect(() => {
+    if (isLoaded) {
+      localStorage.setItem("shopease_cart", JSON.stringify(cart));
+    }
+  }, [cart, isLoaded]);
 
   const addToCart = (product: Product) => {
-  console.log("Adding:", product);
-  setCart((prev) => [...prev, product]);
-};
+    setCart((prev) => [...prev, product]);
+  };
 
   const removeFromCart = (id: number) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
+    // Removes single item matching ID to keep remaining duplicates safe
+    setCart((prev) => {
+      const index = prev.findIndex((item) => item.id === id);
+      if (index === -1) return prev;
+      const updated = [...prev];
+      updated.splice(index, 1);
+      return updated;
+    });
   };
 
   const total = cart.reduce((sum, item) => sum + item.price, 0);
@@ -61,4 +63,5 @@ useEffect(() => {
 export function useCart() {
   const context = useContext(CartContext);
   if (!context) throw new Error("useCart must be used within CartProvider");
-  return context; }
+  return context;
+}

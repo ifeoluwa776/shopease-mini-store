@@ -1,41 +1,34 @@
-"use client";
-
-import { useState } from "react";
-import ProductCard from "@/components/ProductCard";
+import React from "react";
 import { products } from "@/data/products";
+import ProductCard from "@/components/ProductCard";
 
-export default function Home() {
-  const [search, setSearch] = useState("");
-
-  const filteredProducts = products.filter((product) =>
-    product.title.toLowerCase().includes(search.toLowerCase())
-  );
-
+export default function HomePage() {
   return (
-    <main>
-      <h1 className="text-4xl font-bold p-6">All Products</h1>
+    <div style={{ backgroundColor: "#f1f3f6", minHeight: "100vh", padding: "32px 16px", fontFamily: "system-ui, sans-serif" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+        
+        {/* Retail-Style Flash Sale Banner */}
+        <div style={{ backgroundColor: "#ffffff", borderRadius: "8px", padding: "24px", border: "1px solid #e5e7eb", marginBottom: "24px", boxShadow: "0 1px 3px rgba(0,0,0,0.02)" }}>
+          <h1 style={{ fontSize: "22px", fontWeight: "800", color: "#111827", margin: 0, textTransform: "uppercase" }}>
+            Top Deals & Flash Sales
+          </h1>
+          <p style={{ fontSize: "13px", color: "#6b7280", margin: "4px 0 0 0" }}>
+            Handpicked premium essentials for school and daily life.
+          </p>
+        </div>
 
-      {/* SEARCH BAR */}
-      <div className="px-6 mb-4">
-        <input
-          type="text"
-          placeholder="Search products..."
-          className="border p-2 rounded w-full max-w-md"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-      </div>
-
-      {/* PRODUCTS */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6">
-        {filteredProducts.length > 0 ? (
-          filteredProducts.map((product) => (
+        {/* Dynamic Multi-Column Row Wrap Grid */}
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
+          gap: "16px"
+        }}>
+          {products.map((product) => (
             <ProductCard key={product.id} product={product} />
-          ))
-        ) : (
-          <p className="p-6 text-gray-500">No products found</p>
-        )}
+          ))}
+        </div>
+
       </div>
-    </main>
+    </div>
   );
 }

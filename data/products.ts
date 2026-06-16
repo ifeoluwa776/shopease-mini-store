@@ -1,113 +1,53 @@
-export const products = [
+export type Product = {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  category: string;
+  image: string;
+  rating: number;
+  inStock: boolean;
+};
+
+export const products: Product[] = [
   {
     id: 1,
-    title: "Classic Sneakers",
-    description: "Comfortable everyday shoes.",
-    price: 59.99,
-    category: "FOOTWEAR",
-    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff",
+    title: "Premium Wireless Headphones",
+    description: "High-fidelity sound with deep bass response, crystal-clear microphones, and up to 40 hours of active battery backup.",
+    price: 129.99,
+    category: "Electronics",
+    image: "https://unsplash.com",
     rating: 4.5,
-    inStock: true,
+    inStock: true
   },
   {
     id: 2,
-    title: "Smart Watch",
-    description: "Track your health and notifications.",
-    price: 199.99,
-    category: "ELECTRONICS",
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30",
-    rating: 4.8,
-    inStock: true,
+    title: "Classic Sport Sneakers",
+    description: "Lightweight, breathable mesh running shoes with impact-absorbing cushions designed for daily athletic performance.",
+    price: 59.99,
+    category: "Footwear",
+    image: "https://unsplash.com",
+    rating: 4.2,
+    inStock: true
   },
   {
     id: 3,
-    title: "Leather Backpack",
-    description: "Stylish and durable for travel.",
-    price: 85,
-    category: "ACCESSORIES",
-    image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa",
-    rating: 4.2,
-    inStock: false,
+    title: "Minimalist Smart Watch",
+    description: "Track your fitness steps, real-time sleep data, blood monitoring parameters, and notification sync across platforms.",
+    price: 199.99,
+    category: "Electronics",
+    image: "https://unsplash.com",
+    rating: 4.7,
+    inStock: true
   },
   {
     id: 4,
-    title: "Wireless Headphones",
-    description: "Immersive sound with noise cancellation and long battery life.",
-    price: 129.99,
-    category: "Electronics",
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e",
-    rating: 4.6,
-    inStock: true,
-  },
-  {
-    id: 5,
-    title: "Minimal Desk Lamp",
-    description: "Modern desk lamp with adjustable brightness for workspaces.",
-    price: 42.5,
-    category: "Home",
-    image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c",
-    rating: 4.1,
-    inStock: true,
-  },
-  {
-    id: 6,
-    title: "Casual Hoodie",
-    description: "Soft cotton hoodie perfect for everyday comfort.",
-    price: 39.99,
-    category: "Fashion",
-    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab",
-    rating: 4.4,
-    inStock: true,
-  },
-  {
-    id: 7,
-    title: "Gaming Mouse",
-    description: "High-precision gaming mouse with customizable buttons.",
-    price: 54.99,
-    category: "Electronics",
-    image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7",
-    rating: 4.7,
-    inStock: true,
-  },
-  {
-    id: 8,
-    title: "Sunglasses",
-    description: "Lightweight UV-protected sunglasses with modern styling.",
-    price: 24.99,
+    title: "Designer Leather Bag",
+    description: "Handcrafted water-resistant leather shell featuring built-in 15-inch laptop sleeves and hidden asset pockets.",
+    price: 89.99,
     category: "Accessories",
-    image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083",
+    image: "https://unsplash.com",
     rating: 4.0,
-    inStock: true,
-  },
-  {
-    id: 9,
-    title: "Bluetooth Speaker",
-    description: "Portable speaker with rich sound and deep bass.",
-    price: 74.99,
-    category: "Electronics",
-    image: "https://images.unsplash.com/photo-1589003077984-894e133dabab",
-    rating: 4.5,
-    inStock: true,
-  },
-  {
-    id: 10,
-    title: "Office Chair",
-    description: "Ergonomic office chair designed for long work sessions.",
-    price: 149.99,
-    category: "Furniture",
-    image: "https://images.unsplash.com/photo-1505843513577-22bb7d21e455",
-    rating: 4.3,
-    inStock: true,
-  },
-  {
-    id: 11,
-    title: "Water Bottle",
-    description: "Insulated stainless steel bottle that keeps drinks cold.",
-    price: 19.99,
-    category: "Lifestyle",
-    image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8",
-    rating: 4.2,
-    inStock: true,
-  },
-
+    inStock: false
+  }
 ];

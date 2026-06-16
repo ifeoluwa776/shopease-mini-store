@@ -1,46 +1,106 @@
-import Link from "next/link";
+"use client";
 
-type Product = {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  category: string;
-  image: string;
-  rating: number;
-  inStock: boolean;
-};
+import React from "react";
+import { useCart } from "../context/CartContext";
+import { Product } from "../data/products";
 
 export default function ProductCard({ product }: { product: Product }) {
+  const { addToCart } = useCart();
+
+  // Bulletproof mapping helper to show illustration without external assets
+  const getProductEmoji = (id: number) => {
+    if (id === 1) return "🎧";
+    if (id === 2) return "👟";
+    if (id === 3) return "⌚";
+    return "🎒";
+  };
+
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition">
-      <img
-        src={product.image}
-        alt={product.title}
-        className="w-full h-48 object-cover rounded-t-xl"
-      />
+    <div style={{
+      backgroundColor: "#ffffff",
+      border: "1px solid #e5e7eb",
+      borderRadius: "8px",
+      padding: "16px",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      boxShadow: "0 1px 3px rgba(0,0,0,0.02)",
+      position: "relative"
+    }}>
+      
+      <span style={{
+        position: "absolute",
+        top: "12px",
+        left: "12px",
+        fontSize: "10px",
+        fontWeight: "700",
+        backgroundColor: product.inStock ? "#f0fdf4" : "#fef2f2",
+        color: product.inStock ? "#16a34a" : "#dc2626",
+        padding: "4px 8px",
+        borderRadius: "4px",
+        textTransform: "uppercase",
+        zIndex: 10
+      }}>
+        {product.inStock ? "In Stock" : "Out of Stock"}
+      </span>
 
-      <div className="p-5">
-        <p className="text-sm text-gray-500 uppercase">{product.category}</p>
+      {/* Replaced broken img tag with a beautiful local vector text element */}
+      <div style={{ 
+        width: "100%", 
+        height: "140px", 
+        display: "flex", 
+        alignItems: "center", 
+        justifyContent: "center", 
+        margin: "16px 0 12px 0",
+        backgroundColor: "#f9fafb",
+        borderRadius: "6px",
+        fontSize: "64px",
+        userSelect: "none"
+      }}>
+        {getProductEmoji(product.id)}
+      </div>
 
-        <h2 className="text-lg font-semibold mt-2">{product.title}</h2>
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+        <div>
+                   <h3 style={{ fontSize: "14px", fontWeight: "600", color: "#1f2937", margin: "0 0 4px 0", lineHeight: "1.4" }}>
+          <a href={`/product/${product.id}`} style={{ color: "#1f2937", textDecoration: "none" }} onMouseOver={(e) => (e.currentTarget.style.color = "#f68b1e")} onMouseOut={(e) => (e.currentTarget.style.color = "#1f2937")}>
+            {product.title}
+          </a>
+        </h3>
 
-        <p className="text-gray-600 text-sm mt-2 line-clamp-2">
-          {product.description}
-        </p>
-
-        <div className="flex items-center justify-between mt-4">
-          <span className="text-xl font-bold">${product.price}</span>
-          <span className="text-sm text-yellow-600">★ {product.rating}</span>
+          <p style={{ fontSize: "11px", color: "#9ca3af", margin: "0 0 12px 0", fontWeight: "500" }}>
+            ⭐ {product.rating} • {product.category}
+          </p>
         </div>
 
-        <Link
-          href={`/product/${product.id}`}
-          className="block mt-4 text-center bg-black text-white py-2 rounded-xl hover:bg-gray-800 transition"
-        >
-          View Product
-        </Link>
+        <div>
+          <div style={{ display: "flex", alignItems: "baseline", gap: "8px", marginBottom: "12px" }}>
+            <span style={{ fontSize: "20px", fontWeight: "800", color: "#111827" }}>${product.price.toFixed(2)}</span>
+            <span style={{ fontSize: "12px", color: "#9ca3af", textDecoration: "line-through" }}>${(product.price * 1.2).toFixed(2)}</span>
+          </div>
+
+          <button
+            onClick={() => addToCart(product)}
+            disabled={!product.inStock}
+            style={{
+              width: "100%",
+              backgroundColor: product.inStock ? "#f68b1e" : "#d1d5db",
+              color: "#ffffff",
+              border: "none",
+              borderRadius: "6px",
+              padding: "10px 0",
+              fontSize: "12px",
+              fontWeight: "700",
+              cursor: product.inStock ? "pointer" : "not-allowed",
+              textTransform: "uppercase",
+              letterSpacing: "0.5px"
+            }}
+          >
+            {product.inStock ? "Add to Cart" : "Sold Out"}
+          </button>
+        </div>
       </div>
+      
     </div>
   );
 }

@@ -1,7 +1,11 @@
 export default function Footer() {
   return (
-    <footer className="mt-16 border-t pt-6 pb-10 text-center text-sm text-gray-500">
-      <p>© 2026 ShopEase. All rights reserved.</p>
+    <footer className="bg-black text-white py-6 mt-10">
+      <div className="max-w-7xl mx-auto text-center">
+        <p>
+          © 2026 ShopEase. All rights reserved.
+        </p>
+      </div>
     </footer>
   );
 }

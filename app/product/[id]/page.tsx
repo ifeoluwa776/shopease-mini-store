@@ -16,9 +16,9 @@ export default function ProductDetails() {
     return <div className="py-10 text-center">Product not found.</div>;
   }
 
-  return (
-    <div className="max-w-5xl mx-auto py-10 grid md:grid-cols-2 gap-10 items-start">
-      <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+   return (
+  <div className="bg-gray-50 min-h-screen">
+    <div className="max-w-5xl mx-auto py-10 px-4 grid md:grid-cols-2 gap-10 items-start">
         <img
           src={product.image}
           alt={product.title}
@@ -33,15 +33,44 @@ export default function ProductDetails() {
 
         <p className="text-yellow-600 mt-3">★ {product.rating}</p>
 
+        <p className="mt-2">
+  {product.inStock ? (
+    <span className="text-green-600 font-medium">
+      In Stock
+    </span>
+  ) : (
+    <span className="text-red-600 font-medium">
+      Out of Stock
+    </span>
+  )}
+</p>
+
+<button
+  disabled={!product.inStock}
+  onClick={() => addToCart(product)}
+  className={`mt-6 px-6 py-3 rounded-xl text-white transition ${
+    product.inStock
+      ? "bg-black hover:bg-gray-800"
+      : "bg-gray-400 cursor-not-allowed"
+  }`}
+>
+  {product.inStock ? "Add to Cart" : "Out of Stock"}
+</button>
+
         <p className="text-gray-600 mt-5 leading-7">{product.description}</p>
 
         <p className="text-3xl font-bold mt-6">${product.price}</p>
 
         <button
+          disabled={!product.inStock}
           onClick={() => addToCart(product)}
-          className="mt-6 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition"
+          className={`mt-6 px-6 py-3 rounded-xl text-white transition ${
+            product.inStock
+              ? "bg-black hover:bg-gray-800"
+              : "bg-gray-400 cursor-not-allowed"
+          }`}
         >
-          Add to Cart
+          {product.inStock ? "Add to Cart" : "Out of Stock"}
         </button>
 
         <div className="mt-6">
