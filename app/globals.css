@@ -2,9 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Clean retail body setting */
 body {
-  background-color: #f1f3f6;
-  margin: 0;
-  font-family: system-ui, -apple-system, sans-serif;
+  background-color: #f1f1f2;
+  color: #282828;
+  font-family: system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
+
